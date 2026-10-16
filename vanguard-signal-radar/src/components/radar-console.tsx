@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { Activity, Crosshair, Database, Loader2, Radar, Rocket, Zap } from "lucide-react";
+import { ArrowRight, Loader2 } from "lucide-react";
 import { DEFAULT_PRESET, PRESETS, getPreset } from "@/lib/presets";
 import { buildCampaignCsv, downloadCsv, type LeadDraft } from "@/lib/csv";
 import type { Lead, PresetId, SweepEvent, SweepMode } from "@/lib/types";
@@ -9,7 +9,7 @@ import { cn } from "@/lib/utils";
 import { InspectorDrawer } from "./inspector-drawer";
 import { ResultsTable } from "./results-table";
 import { TerminalLog, type LogLine } from "./terminal-log";
-import { formatEur, parseEur } from "./ui";
+import { CountUp, formatEur, parseEur } from "./ui";
 
 export function RadarConsole() {
   const [presetId, setPresetId] = useState<PresetId>(DEFAULT_PRESET.id);
@@ -144,30 +144,25 @@ export function RadarConsole() {
     selectedIndex >= 0 && selectedIndex < leads.length - 1 ? () => setSelectedId(leads[selectedIndex + 1].id) : undefined;
 
   return (
-    <div className="bg-grid min-h-screen">
+    <div className="min-h-screen">
       {/* Top header */}
-      <header className="sticky top-0 z-40 border-b border-line bg-obsidian/90 backdrop-blur">
-        <div className="mx-auto flex max-w-[1440px] flex-wrap items-center justify-between gap-3 px-4 py-3 sm:px-6">
-          <div className="flex items-center gap-3">
-            <div className="relative grid size-8 place-items-center overflow-hidden rounded-md border border-emerald-500/30 bg-emerald-500/10">
-              <Radar className="size-4 text-emerald-400" />
-              {running && (
-                <span className="animate-radar absolute inset-0 bg-[conic-gradient(from_0deg,transparent_0deg,rgb(52_211_153/0.35)_60deg,transparent_70deg)]" />
-              )}
-            </div>
-            <div className="font-mono text-[13px] font-semibold tracking-[0.14em] text-ink">
-              VANGUARD <span className="text-faint">{"//"}</span> SIGNAL RADAR{" "}
-              <span className="text-emerald-400">v2.4</span>
+      <header className="sticky top-0 z-40 border-b border-line bg-obsidian/95 backdrop-blur">
+        <div className="mx-auto flex max-w-[1440px] flex-wrap items-center justify-between gap-3 px-4 py-3.5 sm:px-8">
+          <div className="flex items-center gap-3.5">
+            <Monogram running={running} />
+            <div className="text-[13px] font-semibold tracking-[0.22em] text-ink">
+              VANGUARD <span className="font-normal text-faint">{"//"}</span> SIGNAL RADAR{" "}
+              <span className="ml-1 font-mono text-[11px] font-normal tracking-normal text-brass">v2.4</span>
             </div>
           </div>
 
-          <div className="flex flex-wrap items-center gap-3">
-            <label className="flex items-center gap-2">
-              <span className="hidden font-mono text-[10px] uppercase tracking-[0.18em] text-faint md:inline">Preset</span>
+          <div className="flex flex-wrap items-center gap-5">
+            <label className="flex items-center gap-2.5">
+              <span className="hidden text-[11px] uppercase tracking-[0.14em] text-faint md:inline">Preset</span>
               <select
                 value={presetId}
                 onChange={(e) => applyPreset(e.target.value as PresetId)}
-                className="max-w-[78vw] rounded-md border border-line bg-panel px-2.5 py-1.5 text-xs text-ink focus:border-emerald-500/50 focus:outline-none sm:max-w-none"
+                className="max-w-[82vw] rounded border border-line-strong bg-panel px-2.5 py-1.5 text-xs text-ink transition focus:border-brass focus:outline-none sm:max-w-none"
               >
                 {PRESETS.map((p) => (
                   <option key={p.id} value={p.id}>
@@ -176,29 +171,41 @@ export function RadarConsole() {
                 ))}
               </select>
             </label>
-            <span className="hidden items-center gap-1.5 rounded-md border border-line px-2 py-1.5 font-mono text-[11px] text-muted sm:inline-flex">
-              <Rocket className="size-3 text-emerald-400" />
-              Campaign queue <span className="tabular-nums text-ink">{stats.queued}</span>
-            </span>
+            <div className="hidden items-center gap-5 border-l border-line pl-5 text-[11px] text-faint lg:flex">
+              <span>
+                Campaign queue{" "}
+                <span className="ml-1 font-mono text-[12px] tabular-nums text-ink">{stats.queued}</span>
+              </span>
+              <UtcClock />
+            </div>
           </div>
         </div>
       </header>
 
-      <main className="mx-auto max-w-[1440px] space-y-4 px-4 py-5 sm:px-6">
+      <main className="mx-auto max-w-[1440px] space-y-5 px-4 py-7 sm:px-8">
+        <div className="flex flex-wrap items-end justify-between gap-2">
+          <div>
+            <h1 className="font-serif text-[26px] leading-tight text-ink">Buyer Signal Sweep</h1>
+            <p className="mt-1 text-[13px] text-muted">
+              Identify in-market hardware buyers from their own websites and draft procurement outreach.
+            </p>
+          </div>
+        </div>
+
         {/* Control panel */}
-        <section className="rounded-lg border border-line bg-panel p-4">
-          <div className="grid gap-4 lg:grid-cols-[1fr_1.4fr]">
-            <Field label="Target Buyer Signal / Niche Search" icon={<Crosshair className="size-3.5 text-cyan-400" />}>
+        <section className="rounded-md border border-line bg-panel">
+          <div className="grid gap-px bg-line lg:grid-cols-[1fr_1.4fr]">
+            <Field index="01" label="Target Buyer Signal / Niche Search">
               <input
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 onKeyDown={(e) => e.key === "Enter" && runSweep()}
                 placeholder="industrial IoT hardware manufacturers Germany UK"
                 maxLength={200}
-                className="w-full rounded-md border border-line bg-obsidian px-3 py-2.5 font-mono text-[13px] text-ink placeholder:text-faint focus:border-emerald-500/50 focus:outline-none"
+                className="w-full border-0 border-b border-line-strong bg-transparent px-0 py-2 text-[14px] text-ink transition placeholder:text-faint focus:border-brass focus:outline-none"
               />
             </Field>
-            <Field label="Client Offer & Capability" icon={<Zap className="size-3.5 text-emerald-400" />}>
+            <Field index="02" label="Client Offer & Capability">
               <textarea
                 value={offer}
                 onChange={(e) => {
@@ -208,17 +215,18 @@ export function RadarConsole() {
                 rows={2}
                 maxLength={800}
                 placeholder="What you sell, with the concrete cost / speed / quality edge"
-                className="w-full resize-none rounded-md border border-line bg-obsidian px-3 py-2 text-[13px] leading-relaxed text-ink placeholder:text-faint focus:border-emerald-500/50 focus:outline-none"
+                className="w-full resize-none border-0 border-b border-line-strong bg-transparent px-0 py-2 text-[14px] leading-relaxed text-ink transition placeholder:text-faint focus:border-brass focus:outline-none"
               />
             </Field>
           </div>
 
-          <div className="mt-4 flex flex-wrap items-center justify-between gap-3 border-t border-line pt-4">
-            <div role="radiogroup" aria-label="Sweep mode" className="inline-flex rounded-md border border-line bg-obsidian p-0.5">
-              <ModeButton active={mode === "live"} onClick={() => setMode("live")} icon={<Activity className="size-3.5" />}>
+          <div className="flex flex-wrap items-center justify-between gap-4 border-t border-line px-5 py-4">
+            <div role="radiogroup" aria-label="Sweep mode" className="flex items-center gap-1">
+              <span className="mr-2 text-[11px] uppercase tracking-[0.14em] text-faint">Mode</span>
+              <ModeButton active={mode === "live"} onClick={() => setMode("live")}>
                 Live Web Scrape + Groq AI
               </ModeButton>
-              <ModeButton active={mode === "cache"} onClick={() => setMode("cache")} icon={<Database className="size-3.5" />}>
+              <ModeButton active={mode === "cache"} onClick={() => setMode("cache")}>
                 Cached Instant Demo
               </ModeButton>
             </div>
@@ -227,10 +235,11 @@ export function RadarConsole() {
               type="button"
               onClick={runSweep}
               disabled={running || !query.trim() || !offer.trim()}
-              className="inline-flex items-center gap-2 rounded-md bg-emerald-500 px-5 py-2.5 text-sm font-semibold text-[#04120c] shadow-[0_0_24px_-6px_rgb(16_185_129/0.7)] transition hover:bg-emerald-400 disabled:cursor-not-allowed disabled:opacity-50"
+              className="group inline-flex items-center gap-2.5 rounded bg-ivory px-5 py-2.5 text-[13px] font-semibold text-obsidian transition hover:bg-white disabled:cursor-not-allowed disabled:opacity-50"
             >
-              {running ? <Loader2 className="size-4 animate-spin" /> : <Radar className="size-4" />}
-              {running ? "Sweeping..." : "Execute Signal Sweep"}
+              {running && <Loader2 className="size-4 animate-spin" />}
+              {running ? "Sweep in progress" : "Execute Signal Sweep"}
+              {!running && <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />}
             </button>
           </div>
         </section>
@@ -238,11 +247,21 @@ export function RadarConsole() {
         <TerminalLog lines={logs} running={running} open={terminalOpen} onToggle={() => setTerminalOpen((o) => !o)} />
 
         {leads.length > 0 && (
-          <div className="grid grid-cols-2 gap-px overflow-hidden rounded-lg border border-line bg-line md:grid-cols-4">
-            <Stat label="Qualified Buyers" value={String(leads.length)} />
-            <Stat label="Avg Fit Score" value={stats.avgFit.toFixed(1)} />
-            <Stat label="Pipeline Value" value={`${formatEur(stats.pipeline)}/yr`} accent />
-            <Stat label="Queued for Outbound" value={`${stats.queued} / ${leads.length}`} />
+          <div className="grid grid-cols-2 gap-px overflow-hidden rounded-md border border-line bg-line md:grid-cols-4">
+            <Stat label="Qualified Buyers">
+              <CountUp value={leads.length} format={(n) => String(Math.round(n))} />
+            </Stat>
+            <Stat label="Average Fit Score">
+              <CountUp value={stats.avgFit} format={(n) => n.toFixed(1)} />
+            </Stat>
+            <Stat label="Pipeline Value" accent>
+              <CountUp value={stats.pipeline} format={(n) => formatEur(n)} />
+              <span className="ml-1 text-sm text-faint">/yr</span>
+            </Stat>
+            <Stat label="Queued for Outbound">
+              {stats.queued}
+              <span className="text-faint"> / {leads.length}</span>
+            </Stat>
           </div>
         )}
 
@@ -259,12 +278,19 @@ export function RadarConsole() {
         ) : (
           <EmptyState running={running} />
         )}
+
+        <footer className="flex flex-wrap justify-between gap-2 border-t border-line pt-4 text-[11px] text-faint">
+          <span>Vanguard Signal Radar · Buyer intelligence & outbound</span>
+          <span>Sources: DuckDuckGo HTML index · Company websites · Groq llama-3.3-70b-versatile</span>
+        </footer>
       </main>
 
       {selected && drafts[selected.id] && (
         <InspectorDrawer
           key={selected.id}
           lead={selected}
+          rank={selectedIndex + 1}
+          total={leads.length}
           draft={drafts[selected.id]}
           onChange={(patch) => updateDraft(selected.id, patch)}
           onClose={closeInspector}
@@ -277,8 +303,9 @@ export function RadarConsole() {
       {toast && (
         <div
           role="status"
-          className="animate-fade-in fixed bottom-5 left-1/2 z-[60] -translate-x-1/2 rounded-md border border-emerald-500/30 bg-panel px-4 py-2 font-mono text-xs text-emerald-200 shadow-xl shadow-black/50"
+          className="animate-fade-in fixed bottom-6 left-1/2 z-[60] flex -translate-x-1/2 items-center gap-2.5 rounded border border-line-strong bg-panel-2 px-4 py-2.5 text-xs text-ink shadow-xl shadow-black/50"
         >
+          <span className="size-1.5 rounded-full bg-brass" />
           {toast}
         </div>
       )}
@@ -286,11 +313,42 @@ export function RadarConsole() {
   );
 }
 
-function Field({ label, icon, children }: { label: string; icon: React.ReactNode; children: React.ReactNode }) {
+/** Square monogram; a brass sweep line rotates inside it while a sweep runs. */
+function Monogram({ running }: { running: boolean }) {
   return (
-    <label className="block">
-      <span className="mb-1.5 flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-[0.18em] text-muted">
-        {icon}
+    <div className="relative grid size-8 place-items-center overflow-hidden rounded-sm border border-line-strong bg-panel">
+      <span className="font-serif text-[15px] font-semibold text-ink">V</span>
+      <span
+        className={cn(
+          "absolute left-1/2 top-1/2 h-px w-1/2 origin-left bg-brass transition-opacity",
+          running ? "animate-[spin_1.6s_linear_infinite] opacity-80" : "opacity-0",
+        )}
+      />
+      <span className="absolute inset-x-0 bottom-0 h-[2px] bg-brass" />
+    </div>
+  );
+}
+
+function UtcClock() {
+  const [now, setNow] = useState<Date | null>(null);
+  useEffect(() => {
+    const tick = () => setNow(new Date());
+    tick();
+    const id = setInterval(tick, 1000);
+    return () => clearInterval(id);
+  }, []);
+  return (
+    <span className="font-mono text-[12px] tabular-nums text-muted" suppressHydrationWarning>
+      {now ? `${now.toISOString().slice(11, 19)} UTC` : "--:--:-- UTC"}
+    </span>
+  );
+}
+
+function Field({ index, label, children }: { index: string; label: string; children: React.ReactNode }) {
+  return (
+    <label className="block bg-panel px-5 pb-4 pt-4">
+      <span className="mb-1 flex items-baseline gap-2 text-[11px] uppercase tracking-[0.14em] text-muted">
+        <span className="font-mono text-brass">{index}</span>
         {label}
       </span>
       {children}
@@ -298,17 +356,7 @@ function Field({ label, icon, children }: { label: string; icon: React.ReactNode
   );
 }
 
-function ModeButton({
-  active,
-  onClick,
-  icon,
-  children,
-}: {
-  active: boolean;
-  onClick: () => void;
-  icon: React.ReactNode;
-  children: React.ReactNode;
-}) {
+function ModeButton({ active, onClick, children }: { active: boolean; onClick: () => void; children: React.ReactNode }) {
   return (
     <button
       type="button"
@@ -316,45 +364,65 @@ function ModeButton({
       aria-checked={active}
       onClick={onClick}
       className={cn(
-        "inline-flex items-center gap-1.5 rounded px-3 py-1.5 text-xs font-medium transition",
-        active ? "bg-panel-2 text-ink shadow-[inset_0_0_0_1px_#2a3042]" : "text-faint hover:text-muted",
-        active && "[&>svg]:text-emerald-400",
+        "flex items-center gap-2 rounded border px-3 py-1.5 text-xs transition",
+        active ? "border-line-strong bg-panel-2 text-ink" : "border-transparent text-faint hover:text-muted",
       )}
     >
-      {icon}
+      <span
+        className={cn(
+          "grid size-3 place-items-center rounded-full border transition-colors",
+          active ? "border-brass" : "border-line-strong",
+        )}
+      >
+        <span className={cn("size-1.5 rounded-full transition-transform", active ? "scale-100 bg-brass" : "scale-0")} />
+      </span>
       {children}
     </button>
   );
 }
 
-function Stat({ label, value, accent }: { label: string; value: string; accent?: boolean }) {
+function Stat({ label, accent, children }: { label: string; accent?: boolean; children: React.ReactNode }) {
   return (
-    <div className="bg-panel px-4 py-3">
-      <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-faint">{label}</div>
-      <div className={cn("mt-1 font-mono text-xl tabular-nums", accent ? "text-emerald-300" : "text-ink")}>{value}</div>
+    <div className="animate-fade-in bg-panel px-5 py-4">
+      <div className="text-[11px] uppercase tracking-[0.14em] text-faint">{label}</div>
+      <div className={cn("mt-1.5 font-serif text-[26px] leading-none tabular-nums", accent ? "text-brass" : "text-ink")}>
+        {children}
+      </div>
     </div>
   );
 }
 
 function EmptyState({ running }: { running: boolean }) {
   return (
-    <section className="grid place-items-center rounded-lg border border-dashed border-line bg-panel/50 px-6 py-16 text-center">
-      <div className="relative grid size-24 place-items-center rounded-full border border-line">
-        <div className="absolute inset-3 rounded-full border border-line/70" />
-        <div className="absolute inset-7 rounded-full border border-line/50" />
-        <div
-          className={cn(
-            "absolute inset-0 rounded-full bg-[conic-gradient(from_0deg,transparent_0deg,rgb(52_211_153/0.28)_70deg,transparent_80deg)]",
-            running ? "animate-radar" : "opacity-40",
-          )}
-        />
-        <span className="size-1.5 rounded-full bg-emerald-400" />
+    <section className="rounded-md border border-line bg-panel px-6 py-14">
+      <div className="mx-auto max-w-xl text-center">
+        <p className="font-serif text-xl text-ink">{running ? "Sweep in progress" : "No buyers identified yet"}</p>
+        <p className="mt-2 text-[13px] leading-relaxed text-muted">
+          Choose a preset or describe the niche and offer, then execute a sweep. Live mode reads real company websites and
+          drafts outreach with Groq. The instant cache returns a pre-qualified dataset in 1.5 seconds.
+        </p>
+        <div className="mx-auto mt-6 grid max-w-md grid-cols-3 gap-px overflow-hidden rounded border border-line bg-line text-left">
+          {[
+            ["01", "Search", "Public web index"],
+            ["02", "Crawl", "Company homepages"],
+            ["03", "Analyse", "Signals & outreach"],
+          ].map(([n, title, sub], i) => (
+            <div key={n} className="bg-panel-2 px-3 py-3">
+              <div className="font-mono text-[10px] text-brass">{n}</div>
+              <div className="mt-1 text-[12px] text-ink">{title}</div>
+              <div className="text-[11px] text-faint">{sub}</div>
+              {running && (
+                <div className="relative mt-2 h-px overflow-hidden bg-line-strong">
+                  <span
+                    className="animate-sheen absolute inset-y-0 w-1/2 bg-brass"
+                    style={{ animationDelay: `${i * 200}ms` }}
+                  />
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
       </div>
-      <p className="mt-5 text-sm text-ink">{running ? "Sweeping the market for buying signals..." : "No signals acquired yet"}</p>
-      <p className="mt-1 max-w-md text-xs text-faint">
-        Pick a preset or describe your niche and offer, then execute a sweep. Live mode scrapes real company sites and drafts
-        outreach with Groq; the instant cache renders a pre-qualified dataset in 1.5s.
-      </p>
     </section>
   );
 }
