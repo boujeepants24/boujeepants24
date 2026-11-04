@@ -1,5 +1,14 @@
 # Regime-Aware Multi-Factor Equity Model
 
+> **Status: research prototype, results not validated.** An audit (Nov 2026) found:
+> - **Look-ahead bias (regimes):** the HMM is fitted on training data only, but regimes for the test window are decoded with Viterbi over train *and* test data, so each test-day label uses later observations. A forward-filtered (causal) estimate is needed.
+> - **Look-ahead bias (returns):** holding periods start on the rebalance day itself, so the portfolio earns the return of the day its signal was computed on.
+> - Factor weights per regime are fixed defaults; they are not optimised from in-sample data as described below.
+> - Crypto (7-day) and equity (5-day) calendars are mixed in one daily series.
+>
+> Performance numbers from this version should not be relied on. Fixes are tracked in the Quant Research Lab rebuild.
+
+
 A professional quantitative equity strategy that combines Hidden Markov Model (HMM) regime detection with a four-factor scoring model. The model dynamically adjusts factor weights based on the detected market regime and validates performance through rigorous walk-forward out-of-sample testing.
 
 ---
