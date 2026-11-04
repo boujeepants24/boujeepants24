@@ -29,11 +29,6 @@ Self-taught. I work across full-stack web, AI integrations, business automation,
 
 **Learning by building now:** TypeScript, Next.js, PostgreSQL/Supabase, Docker.
 
-### Other work
-
-- [dna-toolkit](https://github.com/boujeepants24/dna-toolkit): Needleman–Wunsch alignment and ORF finder written from scratch, with a Streamlit UI.
-- Earlier learning projects (an AMM, token contracts, NLP and ML demos) are kept public for history and marked as such.
-
 ### Contact
 
 aranthebotguy@gmail.com
