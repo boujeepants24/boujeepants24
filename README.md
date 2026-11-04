@@ -1,7 +1,7 @@
 <h1 align="center">Hey, I'm Aran 👋</h1>
 
 <p align="center">
-  <em>Builder · Quantitative Developer · Web3 Enthusiast</em>
+  <em>I build AI agents that make money: agents + evals + the sales to land them</em>
 </p>
 
 <p align="center">
@@ -16,14 +16,15 @@
 
 ### About Me
 
-- 🔬 Quantitative developer building systematic trading strategies and on-chain analytics
-- 🧬 Exploring bioinformatics and computational biology
-- 🌐 Full-stack developer shipping production web apps
-- 🤖 Building AI/ML applications with real-world impact
-- 📍 Based in India · Starting Engineering Sciences at Tor Vergata (Rome) — Sept 2026
+- 🤖 Building production AI agents with Claude: tool-use loops, MCP servers, agent skills and evals
+- 📈 Running AI outreach and booking systems for agencies that sell to trade businesses
+- 🔬 Quant developer: systematic strategies, regime models, NLP alpha
+- 📍 Based in India · Engineering Sciences at Tor Vergata (Rome)
+- 🚀 Looking for a founding-engineer role at an early-stage AI startup (remote now, SF later)
 
 ### What I'm Working On
 
+- 🤖 **AI Agents** — research-and-draft agents with guardrail loops, MCP servers, Claude skills, LLM evals
 - 📊 **Quantitative Finance** — HMM regime models, Kalman filter hedging, NLP-driven alpha, funding rate arbitrage
 - ⛓️ **Web3 / DeFi** — ERC-20/721 contracts, AMM protocols, on-chain analysis tools
 - 🧪 **Data Science & ML** — Predictive models, NLP pipelines, computer vision demos
@@ -33,6 +34,7 @@
 
 | Domain | Tools |
 |--------|-------|
+| **AI / Agents** | Claude API (tool use, structured outputs), MCP, Claude Code skills, evals, pytest |
 | **Languages** | Python, Solidity, JavaScript, PHP, SQL |
 | **ML / Data** | scikit-learn, NumPy, pandas, HuggingFace Transformers, Plotly |
 | **Web3** | Hardhat, Ethers.js, OpenZeppelin, Sepolia Testnet |
@@ -44,6 +46,8 @@
 
 | Project | Description | Stack |
 |---------|-------------|-------|
+| [**outreach-agent**](https://github.com/boujeepants24/outreach-agent) | Claude agent that researches a lead, drafts a cold email, self-corrects against guardrails, and triages replies · MCP server + evals | Python, Claude API, MCP |
+| [**outreach-skills**](https://github.com/boujeepants24/outreach-skills) | 3 Claude agent skills: lead research, cold email, reply triage | Claude Code skills |
 | [**regime-factor-model**](https://github.com/boujeepants24/regime-factor-model) | HMM regime detection + multi-factor equity model · 22% CAGR, Sharpe 0.98 | Python, NumPy |
 | [**kalman-factor-neutral**](https://github.com/boujeepants24/kalman-factor-neutral) | Market-neutral strategy with Kalman beta hedging · -0.16 SPY correlation | Python, NumPy |
 | [**finbert-earnings-alpha**](https://github.com/boujeepants24/finbert-earnings-alpha) | FinBERT NLP earnings sentiment alpha · IC=0.618, t-stat 14.6 | Python, HuggingFace |
