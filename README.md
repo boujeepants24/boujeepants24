@@ -1,5 +1,12 @@
 # Kalman Factor-Neutral Strategy
 
+> **Status: research prototype, results not validated.** An audit (Nov 2026) found:
+> - **Look-ahead bias:** on rebalance days the new weights are built from returns that include that day, and are then applied to that same day's return (`src/backtest.py`). Weights should take effect from the next day.
+> - **Survivorship bias:** the 40-stock universe is a hand-picked list of today's large caps applied back to 2015.
+>
+> Performance numbers from this version should not be relied on. Fixes are tracked in the Quant Research Lab rebuild.
+
+
 A quantitative long/short equity strategy combining momentum + quality factor
 signals with time-varying Kalman filter beta hedging.
 
