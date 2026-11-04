@@ -46,4 +46,4 @@ Each project still runs on its own (`cd projects/<name> && pip install -r requir
 
 ## History
 
-These projects were separate repositories, merged here with their full commit history. The original repositories are archived.
+These projects were separate repositories, merged here with their full commit history. This is now the only maintained copy.
