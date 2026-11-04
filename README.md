@@ -1,6 +1,14 @@
 # Crypto Funding Rate Arbitrage Engine
 
-A professional-grade quantitative backtesting engine for the **perpetual futures funding rate arbitrage** strategy — one of the most capital-efficient strategies historically deployed by crypto hedge funds (Three Arrows Capital, Alameda Research, Wintermute, etc.).
+> **Status: research prototype, results not validated.** An audit (Nov 2026) found issues that affect the reported performance:
+> - Closing costs are deducted twice on exit (`src/backtest.py`, exit branch), which understates returns.
+> - Position sizing is a flat 15% of NAV; `src/sizing.py` (Kelly) is not wired in.
+> - Strategy parameters were chosen and evaluated on the same period (no out-of-sample split).
+> - Results depend on data fetched at run time; there is no pinned dataset, so runs are not reproducible.
+>
+> Treat any numbers produced by this code as unverified until these are fixed. Fixes are tracked in the Quant Research Lab rebuild.
+
+A backtesting engine for the **perpetual futures funding rate arbitrage** strategy. P&L comes from funding payments collected while holding offsetting spot and perpetual positions.
 
 ---
 
@@ -251,19 +259,6 @@ python main.py --help
 5. **Crowding**: As this strategy has become widely known, elevated funding increasingly reflects the strategy's own demand for shorts rather than organic market structure.
 
 6. **Negative funding streaks**: When the market is in a sustained bear regime, funding may stay negative for extended periods. The strategy handles this (long perp / short spot) but short selling spot adds borrow costs and liquidity risk.
-
----
-
-## Background: Who Runs This Strategy
-
-Funding rate arbitrage has been one of the most consistent alpha sources in crypto:
-
-- **Alameda Research** reportedly ran this at scale, using cross-exchange basis trades
-- **Three Arrows Capital** deployed leveraged versions during 2020-2021 bull runs
-- **Market neutral hedge funds** (Elwood, Fasanara) run systematic versions today
-- At peak bull market (Nov 2021), BTC funding rates averaged 0.1%+ per 8h (~110% annualized) for weeks — pure delta-neutral carry
-
-The Sharpe ratio of a well-executed funding arb strategy has historically been 2-5x during high-funding regimes, making it one of the best risk-adjusted strategies available in crypto markets.
 
 ---
 
