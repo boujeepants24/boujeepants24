@@ -1,65 +1,36 @@
-<h1 align="center">Hey, I'm Aran 👋</h1>
+## Aran Chundru
 
-<p align="center">
-  <em>Builder · Quantitative Developer · Automation for Local Businesses</em>
-</p>
+**AI-native product engineer.** I take a business problem, design the system, build it, ship it, and measure whether it helped.
 
-<p align="center">
-  <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" />
-  <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black" />
-  <img src="https://img.shields.io/badge/PHP-777BB4?style=for-the-badge&logo=php&logoColor=white" />
-  <img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=black" />
-</p>
+Self-taught. I work across full-stack web, AI integrations, business automation, smart contracts and quantitative research. I'd rather show working, tested software than list skills, so everything below links to code you can run.
 
----
+### What I'm building now
 
-### About Me
+| Project | What it is | Status |
+|---|---|---|
+| **BusinessOS** | Operations platform for local service businesses: lead capture, booking, follow-ups, invoicing, payment chasing and reviews, run automatically while the owner does the work. | Working prototype (booking site, chat intake, Apps Script back office with lifecycle tests). Moving to Next.js + Postgres. Repo going public this month. |
+| **Onchain Escrow** | Milestone-based escrow for freelance and agency work: deposit, approve milestones, release, refund, dispute. Solidity + Foundry with fuzz and invariant tests. | In development. Repo going public this month. Testnet only. |
+| **Quant Research Lab** | Rebuilding my earlier backtests ([funding-rate arb](https://github.com/boujeepants24/crypto-funding-arb), [Kalman market-neutral](https://github.com/boujeepants24/kalman-factor-neutral), [HMM regimes](https://github.com/boujeepants24/regime-factor-model), [FinBERT event study](https://github.com/boujeepants24/finbert-earnings-alpha)) with pinned data, no look-ahead, out-of-sample tests and cost modelling. | Rebuild planned. Each repo's README lists the issues found in my own audit; treat their current results as unverified. |
 
-- 🛠️ Building booking, chat and lead-capture systems that stop local businesses losing work to missed calls
-- 🔬 Quantitative developer building systematic trading strategies
-- 🧬 Exploring bioinformatics and computational biology
-- 🌐 Full-stack developer shipping production web apps
-- 🤖 Building AI/ML applications with real-world impact
+### How I work
 
-### What I'm Working On
+- **Start from the problem.** Software earns its place by saving someone time or money.
+- **Tests before claims.** If a number is in a README, the command that produced it is next to it.
+- **Say what's wrong.** Every project lists its known limitations.
+- **Ship small, then improve.** A working core workflow beats a long feature list.
+- **Security is part of the build,** not a step at the end. Contracts get adversarial tests; nothing touches real funds without an independent review.
 
-- 📊 **Quantitative Finance** — HMM regime models, Kalman filter hedging, NLP-driven alpha, funding rate arbitrage
-- 🧰 **Business Automation** — 24/7 chat receptionists, online booking, Google-Sheet CRMs, lead follow-up
-- 🧪 **Data Science & ML** — Predictive models, NLP pipelines, computer vision demos
-  
+### Stack
 
-### Tech Stack
+**Used in my public code:** Python (pandas, NumPy, SciPy, scikit-learn, Streamlit), JavaScript, HTML/CSS, Google Apps Script, PHP with MySQL, SQLite, HuggingFace Transformers, Solidity with Hardhat, OpenZeppelin and ethers.js, Git.
 
-| Domain | Tools |
-|--------|-------|
-| **Languages** | Python, JavaScript, PHP, SQL |
-| **ML / Data** | scikit-learn, NumPy, pandas, HuggingFace Transformers, Plotly |
-| **Automation** | Google Apps Script, Webhooks, WhatsApp click-to-chat, Schema.org local SEO |
-| **Backend** | Node.js, PHP, MySQL, SQLite, REST APIs |
-| **Frontend** | React, Streamlit, HTML/CSS, Responsive Design |
-| **Tools** | Git, Jupyter, Docker, Linux, Telegram Bot API |
+**Learning by building now:** TypeScript, Next.js, PostgreSQL/Supabase, Claude API (tool use, structured outputs, evals), Foundry fuzz and invariant testing, GitHub Actions, Docker.
 
-### Featured Projects
+### Other work
 
-| Project | Description | Stack |
-|---------|-------------|-------|
-| [**business-offer-kit**](https://github.com/boujeepants24/business-offer-kit) | Booking site, 24/7 chat receptionist and Google-Sheet CRM for local service businesses | JavaScript, Apps Script |
-| [**regime-factor-model**](https://github.com/boujeepants24/regime-factor-model) | HMM regime detection + multi-factor equity model · 22% CAGR, Sharpe 0.98 | Python, NumPy |
-| [**kalman-factor-neutral**](https://github.com/boujeepants24/kalman-factor-neutral) | Market-neutral strategy with Kalman beta hedging · -0.16 SPY correlation | Python, NumPy |
-| [**finbert-earnings-alpha**](https://github.com/boujeepants24/finbert-earnings-alpha) | FinBERT NLP earnings sentiment alpha · IC=0.618, t-stat 14.6 | Python, HuggingFace |
-| [**crypto-funding-arb**](https://github.com/boujeepants24/crypto-funding-arb) | Binance funding rate arbitrage · Sharpe 2.5, Max DD -1.9% | Python, NumPy |
-| [**dna-toolkit**](https://github.com/boujeepants24/dna-toolkit) | DNA sequence analyzer with ORF finder & alignment | Python, Biopython |
-| [**ai-demo-app**](https://github.com/boujeepants24/ai-demo-app) | Sentiment analysis + NER + summarization demo | HuggingFace, Streamlit |
+- [dna-toolkit](https://github.com/boujeepants24/dna-toolkit): Needleman–Wunsch alignment and ORF finder written from scratch, with a Streamlit UI.
+- Earlier learning projects (an AMM, token contracts, NLP and ML demos) are kept public for history and marked as such.
 
-### GitHub Stats
+### Contact
 
-<p align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=boujeepants24&show_icons=true&theme=tokyonight&hide_border=true" height="165" />
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=boujeepants24&layout=compact&theme=tokyonight&hide_border=true" height="165" />
-</p>
-
----
-
-<p align="center">
-  <a href="mailto:aranthebotguy@gmail.com"><img src="https://img.shields.io/badge/Email-D14836?style=flat-square&logo=gmail&logoColor=white" /></a>
-</p>
+aranthebotguy@gmail.com
