@@ -46,8 +46,8 @@
 
 | Project | Description | Stack |
 |---------|-------------|-------|
-| [**outreach-agent**](https://github.com/boujeepants24/outreach-agent) | Claude agent that researches a lead, drafts a cold email, self-corrects against guardrails, and triages replies · MCP server + evals | Python, Claude API, MCP |
-| [**outreach-skills**](https://github.com/boujeepants24/outreach-skills) | 3 Claude agent skills: lead research, cold email, reply triage | Claude Code skills |
+| [**outreach-agent**](https://github.com/boujeepants24/ai-demo-app/tree/master/agents/outreach-agent) | Claude agent that researches a lead, drafts a cold email, self-corrects against guardrails, and triages replies · MCP server + evals | Python, Claude API, MCP |
+| [**outreach-skills**](https://github.com/boujeepants24/ai-demo-app/tree/master/agents/outreach-skills) | 3 Claude agent skills: lead research, cold email, reply triage | Claude Code skills |
 | [**regime-factor-model**](https://github.com/boujeepants24/regime-factor-model) | HMM regime detection + multi-factor equity model · 22% CAGR, Sharpe 0.98 | Python, NumPy |
 | [**kalman-factor-neutral**](https://github.com/boujeepants24/kalman-factor-neutral) | Market-neutral strategy with Kalman beta hedging · -0.16 SPY correlation | Python, NumPy |
 | [**finbert-earnings-alpha**](https://github.com/boujeepants24/finbert-earnings-alpha) | FinBERT NLP earnings sentiment alpha · IC=0.618, t-stat 14.6 | Python, HuggingFace |
