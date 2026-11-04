@@ -1,5 +1,8 @@
 # FinBERT NLP Earnings Sentiment Alpha
 
+> **Status: synthetic methodology test, not evidence of alpha.** The earnings text is generated from each event's *actual* post-earnings return, so sentiment is correlated with future returns by construction. Any IC, t-statistic or backtest result here measures that data generator, not FinBERT's ability to predict markets. The FinBERT pipeline and event-study maths are real; a test on real filings (e.g. SEC 8-K earnings releases) is planned.
+
+
 An event-driven quantitative trading strategy that applies **FinBERT** — a BERT model pre-trained on financial text — to earnings announcements to generate sentiment signals and trade on post-announcement price drift.
 
 ---
