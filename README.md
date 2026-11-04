@@ -8,8 +8,9 @@ Self-taught. I work across full-stack web, AI integrations, business automation,
 
 | Project | What it is | Status |
 |---|---|---|
-| **BusinessOS** | Operations platform for local service businesses: lead capture, booking, follow-ups, invoicing, payment chasing and reviews, run automatically while the owner does the work. | Working prototype (booking site, chat intake, Apps Script back office with lifecycle tests). Moving to Next.js + Postgres. Repo going public this month. |
-| **Onchain Escrow** | Milestone-based escrow for freelance and agency work: deposit, approve milestones, release, refund, dispute. Solidity + Foundry with fuzz and invariant tests. | In development. Repo going public this month. Testnet only. |
+| **[BusinessOS](https://github.com/boujeepants24/businessos)** | Runs the back office of a local service business while the owner does the work: booking site, chat receptionist, missed-call text-back (Twilio), reminders, quotes, invoices, payment chasing, reviews, rebooking and reports. | Working prototype with automated tests (Apps Script back office, Python comms gateway). Moving to Next.js + Postgres. |
+| **[domain-rag](https://github.com/boujeepants24/domain-rag)** | Retrieval-augmented answers over one folder of documents, exposed as an MCP server and a multi-client web API. Hybrid search, cited answers from Claude, prompt-injection defences, evaluation harness. | Pipeline complete and tested; powers BusinessOS's chat answers. |
+| **[Onchain Escrow](https://github.com/boujeepants24/onchain-escrow)** | Milestone-based escrow for freelance and agency work: deposit, approve, release, refund, dispute. Solidity + Foundry. | Contract with unit, fuzz, adversarial and invariant tests. Not audited; testnet only. Frontend next. |
 | **[Quant Research Lab](https://github.com/boujeepants24/quant-research-lab)** | My four earlier backtests (funding-rate arbitrage, Kalman market-neutral, HMM regimes, FinBERT event study) in one repo, being rebuilt to one standard: pinned data, no look-ahead, out-of-sample tests, cost modelling. | Rebuild planned. Every project lists the issues found in my own audit; treat current results as unverified. |
 
 ### How I work
@@ -24,7 +25,9 @@ Self-taught. I work across full-stack web, AI integrations, business automation,
 
 **Used in my public code:** Python (pandas, NumPy, SciPy, scikit-learn, Streamlit), JavaScript, HTML/CSS, Google Apps Script, PHP with MySQL, SQLite, HuggingFace Transformers, Solidity with Hardhat, OpenZeppelin and ethers.js, Git.
 
-**Learning by building now:** TypeScript, Next.js, PostgreSQL/Supabase, Claude API (tool use, structured outputs, evals), Foundry fuzz and invariant testing, GitHub Actions, Docker.
+**Used in projects above:** Claude API (structured outputs), MCP servers, retrieval (BM25 + vectors), Starlette, Twilio, Foundry fuzz and invariant testing, GitHub Actions.
+
+**Learning by building now:** TypeScript, Next.js, PostgreSQL/Supabase, Docker.
 
 ### Other work
 
