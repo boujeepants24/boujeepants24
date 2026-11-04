@@ -26,7 +26,7 @@
 - 📊 **Quantitative Finance** — HMM regime models, Kalman filter hedging, NLP-driven alpha, funding rate arbitrage
 - 🧰 **Business Automation** — 24/7 chat receptionists, online booking, Google-Sheet CRMs, lead follow-up
 - 🧪 **Data Science & ML** — Predictive models, NLP pipelines, computer vision demos
-- 🧬 **Bioinformatics** — DNA sequence analysis, ORF detection, pairwise alignment algorithms
+  
 
 ### Tech Stack
 
