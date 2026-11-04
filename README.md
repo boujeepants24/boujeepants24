@@ -10,7 +10,7 @@ Self-taught. I work across full-stack web, AI integrations, business automation,
 |---|---|---|
 | **BusinessOS** | Operations platform for local service businesses: lead capture, booking, follow-ups, invoicing, payment chasing and reviews, run automatically while the owner does the work. | Working prototype (booking site, chat intake, Apps Script back office with lifecycle tests). Moving to Next.js + Postgres. Repo going public this month. |
 | **Onchain Escrow** | Milestone-based escrow for freelance and agency work: deposit, approve milestones, release, refund, dispute. Solidity + Foundry with fuzz and invariant tests. | In development. Repo going public this month. Testnet only. |
-| **Quant Research Lab** | Rebuilding my earlier backtests ([funding-rate arb](https://github.com/boujeepants24/crypto-funding-arb), [Kalman market-neutral](https://github.com/boujeepants24/kalman-factor-neutral), [HMM regimes](https://github.com/boujeepants24/regime-factor-model), [FinBERT event study](https://github.com/boujeepants24/finbert-earnings-alpha)) with pinned data, no look-ahead, out-of-sample tests and cost modelling. | Rebuild planned. Each repo's README lists the issues found in my own audit; treat their current results as unverified. |
+| **[Quant Research Lab](https://github.com/boujeepants24/quant-research-lab)** | My four earlier backtests (funding-rate arbitrage, Kalman market-neutral, HMM regimes, FinBERT event study) in one repo, being rebuilt to one standard: pinned data, no look-ahead, out-of-sample tests, cost modelling. | Rebuild planned. Every project lists the issues found in my own audit; treat current results as unverified. |
 
 ### How I work
 
