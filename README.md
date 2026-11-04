@@ -20,7 +20,6 @@
 - 🧬 Exploring bioinformatics and computational biology
 - 🌐 Full-stack developer shipping production web apps
 - 🤖 Building AI/ML applications with real-world impact
-- 📍 Based in India · Starting Engineering Sciences at Tor Vergata (Rome) — Sept 2026
 
 ### What I'm Working On
 
